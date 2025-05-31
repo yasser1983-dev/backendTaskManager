@@ -4,6 +4,6 @@ from tasks.views.category_views import CategoryViewSet
 
 router = DefaultRouter()
 router.register(r'tasks', TaskViewSet, basename='task')
-router.register(r'categories', CategoryViewSet, basename='category')
+router.register(r'categories', CategoryViewSet, basename='category-list')
 
 urlpatterns = router.urls
