@@ -35,8 +35,12 @@ backendTaskManager/
 │   ├── tests/                         # Pruebas automatizadas de la aplicación 
 │   │   ├── conftest.py                # Configuración de pruebas
 │   │   ├── unit/                      # Pruebas unitarias (sin base de datos real)
-│   │   │   └── test_task_service_integration.py  # Aquí irían las pruebas unitarias de TaskService
+│   │   │   ├── test_category_service_unit.py  # Las pruebas unitarias de CategoryService
+│   │   │   ├── test_category_viewset_unit.py  # Las pruebas unitarias de CategoryViewSet
+│   │   │   └── test_task_service_unit.py  # Aquí irían las pruebas unitarias de TaskService
 │   ├── integration/                   # Pruebas de integración (con base de datos real)
+│   │   │   ├── test_category_service_integration.py  # Las pruebas de integración de CategoryService
+│   │   │   ├── test_category_viewset_integration.py  # Las pruebas de integración de CategoryViewSet
 │   │   │   └── test_task_service_integration.py # Aquí irían las pruebas de integración de TaskService
 │   └── urls.py                        # Rutas específicas de la app `tasks`
 └── requirements.txt                   # Lista de dependencias del proyecto para instalar con pip
