@@ -8,6 +8,7 @@ Este sistema deberá permitirte crear nuevas tareas, actualizarlas y consultarla
 ```bash
 backendTaskManager/
 ├── manage.py                          # Script principal para ejecutar comandos de Django (migraciones, servidor, etc.)
+├── pytest.ini                         # Configuración de pytest para pruebas automatizadas
 ├── core/                              # Módulo central de configuraciones compartidas
 │   ├── injection.py                   # Configuración de inyección de dependencias (DI) para toda la aplicación
 ├── backendTaskManager/                # Configuración principal del proyecto Django
@@ -31,7 +32,12 @@ backendTaskManager/
 │   ├── factories.py                   # Generadores de datos falsos para pruebas o desarrollo
 │   ├── models.py                      # Definición de modelos de base de datos (Task, Category, etc.)
 │   ├── serializers.py                 # Serializadores para convertir modelos a JSON y viceversa
-│   ├── tests.py                       # Pruebas automatizadas de la aplicación
+│   ├── tests/                         # Pruebas automatizadas de la aplicación 
+│   │   ├── conftest.py                # Configuración de pruebas
+│   │   ├── unit/                      # Pruebas unitarias (sin base de datos real)
+│   │   │   └── test_task_service_integration.py  # Aquí irían las pruebas unitarias de TaskService
+│   ├── integration/                   # Pruebas de integración (con base de datos real)
+│   │   │   └── test_task_service_integration.py # Aquí irían las pruebas de integración de TaskService
 │   └── urls.py                        # Rutas específicas de la app `tasks`
 └── requirements.txt                   # Lista de dependencias del proyecto para instalar con pip
 ```

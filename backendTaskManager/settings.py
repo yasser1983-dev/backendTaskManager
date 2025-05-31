@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 
 from pathlib import Path
+from decouple import config, Csv
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -53,7 +54,6 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    # 'django_injector.middleware.InjectorMiddleware',
 ]
 
 REST_FRAMEWORK = {
@@ -65,14 +65,19 @@ REST_FRAMEWORK = {
     'PAGE_SIZE': 3,
 }
 
-# INJECTOR_MODULES = [
-#     'tasks.services.di.TaskModule',
-# ]
 INJECTOR_MODULES = [
     'core.injection.AppModule',
 ]
 
-CORS_ALLOW_ALL_ORIGINS = True
+CORS_ALLOW_ALL_ORIGINS = config('CORS_ALLOW_ALL_ORIGINS', default=False, cast=bool)
+
+CORS_ALLOWED_ORIGINS = config(
+    'CORS_ALLOWED_ORIGINS',
+    default='',
+    cast=Csv()
+)
+
+
 
 ROOT_URLCONF = 'backendTaskManager.urls'
 

@@ -15,4 +15,4 @@ class CategoryService(ICategoryService):
         return random.choice(available_colors)
 
     def get_all_categories(self):
-        return Category.objects.all()
+        return Category.objects.all().order_by('name')
