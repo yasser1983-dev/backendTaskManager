@@ -18,7 +18,7 @@ from django.contrib import admin
 from django.urls import path, include
 from rest_framework.authtoken.views import obtain_auth_token
 from rest_framework.routers import DefaultRouter
-from tasks.views import LogoutViewSet
+from tasks.views.auth_views import LogoutViewSet
 
 router = DefaultRouter()
 router.register(r'auth', LogoutViewSet, basename='auth')
