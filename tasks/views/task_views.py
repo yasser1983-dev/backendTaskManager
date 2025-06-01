@@ -6,7 +6,7 @@ from rest_framework.response import Response
 
 from tasks.serializers import TaskSerializer, CategorySerializer
 from tasks.services.interfaces import ITaskService, ICategoryService
-
+from tasks.pagination import CustomTaskPagination
 
 class TaskViewSet(viewsets.ModelViewSet):
     """
@@ -16,6 +16,7 @@ class TaskViewSet(viewsets.ModelViewSet):
     """
     serializer_class = TaskSerializer
     permission_classes = [IsAuthenticated]
+    pagination_class = CustomTaskPagination
 
     @inject
     def setup(self, request, *args, task_service: ITaskService, **kwargs):
@@ -58,6 +59,9 @@ class TaskViewSet(viewsets.ModelViewSet):
             Response: A DRF Response containing serialized pending tasks.
         """
         tasks = self.task_service.get_pending_tasks(user=request.user)
+        if tasks is not None:
+            serializer = self.get_serializer(tasks, many=True)
+            return self.get_paginated_response(serializer.data)
         serializer = self.get_serializer(tasks, many=True)
         return Response(serializer.data)
 
