@@ -59,8 +59,9 @@ class TaskViewSet(viewsets.ModelViewSet):
             Response: A DRF Response containing serialized pending tasks.
         """
         tasks = self.task_service.get_pending_tasks(user=request.user)
-        if tasks is not None:
-            serializer = self.get_serializer(tasks, many=True)
+        page = self.paginate_queryset(tasks)
+        if page is not None:
+            serializer = self.get_serializer(page, many=True)
             return self.get_paginated_response(serializer.data)
         serializer = self.get_serializer(tasks, many=True)
         return Response(serializer.data)
@@ -77,6 +78,10 @@ class TaskViewSet(viewsets.ModelViewSet):
             Response: A DRF Response containing serialized completed tasks.
         """
         tasks = self.task_service.get_completed_tasks(user=request.user)
+        page = self.paginate_queryset(tasks)
+        if page is not None:
+            serializer = self.get_serializer(page, many=True)
+            return self.get_paginated_response(serializer.data)
         serializer = self.get_serializer(tasks, many=True)
         return Response(serializer.data)
 
